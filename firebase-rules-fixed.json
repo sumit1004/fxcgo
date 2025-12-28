@@ -1,0 +1,160 @@
+{
+  "description": "Fixed Firebase Security Rules for eKYC System",
+  "exporter": {
+    "firestore": {
+      "rules": "rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    \n    // Allow users to read/write their own user document\n    match /users/{userId} {\n      allow read, write: if request.auth != null && request.auth.uid == userId;\n      \n      // Allow users to read/write their own products subcollection\n      match /products/{productId} {\n        allow read: if true; // Public read for marketplace\n        allow write: if request.auth != null && request.auth.uid == userId;\n      }\n      \n      // Allow users to read/write their own documents subcollection\n      match /documents/{documentId} {\n        allow read, write: if request.auth != null && request.auth.uid == userId;\n      }\n    }\n    \n    // eKYC Collection - Top-level collection (NOT under /users)\n    // Users can read/write their own eKYC document\n    // Admins (authenticated users) can read all eKYC for verification\n    match /ekyc/{userId} {\n      allow read: if request.auth != null && (request.auth.uid == userId || true); // Allow authenticated users to read (for admin)\n      allow write: if request.auth != null && request.auth.uid == userId; // Users can only write their own\n      allow update: if request.auth != null; // Allow admin updates (for verification)\n    }\n    \n    // Video Call Requests - Allow authenticated users to read/write\n    // This includes admin and users\n    match /videoCallRequests/{requestId} {\n      allow read: if request.auth != null;\n      allow create: if request.auth != null;\n      allow update: if request.auth != null;\n      allow delete: if request.auth != null;\n    }\n  }\n}",
+      "explanation": "Firestore rules for exporter. eKYC is stored at /ekyc/{userId} (top-level), not /users/{userId}/ekyc. Admin needs read access to verify eKYC."
+    },
+    "realtime": {
+      "rules": {
+        "rules": {
+          "productCatalog": {
+            ".read": true,
+            ".write": "auth != null"
+          },
+          "users": {
+            ".read": true,
+            "$uid": {
+              ".read": "$uid === auth.uid",
+              ".write": "$uid === auth.uid",
+              "cart": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "products": {
+                ".read": true,
+                ".write": "$uid === auth.uid"
+              },
+              "profile": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "documents": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "videoCallRequests": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "summary": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "shipments": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "payments": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "disputes": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "support": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "orders": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "notifications": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              }
+            }
+          },
+          "supportStatus": {
+            "admin": {
+              ".read": "auth != null",
+              ".write": "auth != null"
+            }
+          },
+          "supportChat": {
+            ".read": "auth != null",
+            ".write": "auth != null"
+          }
+        }
+      },
+      "explanation": "Realtime Database rules for exporter. Note: eKYC for exporters is stored in Firestore, not Realtime Database."
+    }
+  },
+  "importer": {
+    "realtime": {
+      "rules": {
+        "rules": {
+          "importers": {
+            ".read": "auth != null",
+            "$uid": {
+              ".read": "$uid === auth.uid || auth != null",
+              ".write": "$uid === auth.uid",
+              "cart": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "profile": {
+                ".read": "$uid === auth.uid || auth != null",
+                ".write": "$uid === auth.uid"
+              },
+              "ekyc": {
+                ".read": "$uid === auth.uid || auth != null",
+                ".write": "$uid === auth.uid || auth != null"
+              },
+              "videoCallRequests": {
+                ".read": "$uid === auth.uid || auth != null",
+                ".write": "$uid === auth.uid || auth != null"
+              },
+              "summary": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "shipments": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "documents": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "payments": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "disputes": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "support": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "orders": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              },
+              "notifications": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+              }
+            }
+          },
+          "supportStatus": {
+            "admin": {
+              ".read": "auth != null",
+              ".write": "auth != null"
+            }
+          },
+          "supportChat": {
+            ".read": "auth != null",
+            ".write": "auth != null"
+          }
+        }
+      },
+      "explanation": "Realtime Database rules for importer. eKYC is stored at /importers/{uid}/ekyc. Admin needs read access (auth != null allows authenticated admin)."
+    }
+  }
+}
+

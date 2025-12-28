@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FXcgo</title>
+    <link rel="shortcut icon" href="../assets/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="others.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="shortcut icon" href="/assets/logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <!-- Dashboard Layout -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="../index.html" style="text-decoration: none;"><img src="../assets/logo-1.png" alt="" width="40px"><span class="logo-text">FXcgo</span></a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                   
+                    <li class="nav-item">
+                        <a href="#contracts" class="nav-link" data-tab="contracts">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            <span>Forward Contracts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#insurance" class="nav-link" data-tab="insurance">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            <span>Insurance</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#documents" class="nav-link" data-tab="documents">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            <span>Documents</span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                   
+                   
+                    <li class="nav-item">
+                        <a href="../marketplace/marketplace.html" class="nav-link" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 7h18"></path>
+                                <path d="M6 7V3h12v4"></path>
+                                <path d="M5 7l1.68 12.06A2 2 0 0 0 8.66 21h6.68a2 2 0 0 0 1.98-1.94L19 7"></path>
+                            </svg>
+                            <span>Marketplace</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="dashboard-main">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <h1 class="page-title" id="pageTitle">Dashboard</h1>
+                </div>
+                
+            </header>
+
+            
+
+                <!-- Forward Contracts Section -->
+                <div class="content-section" id="contractsSection" style="display: none;">
+                    <div class="forward-contract-container">
+                        <header class="forward-contract-hero">
+                            <div class="forward-contract-hero-icon">💱</div>
+                            <h2>Forward Contract Note Generator</h2>
+                            <p class="forward-contract-subheadline">Analyze FX trends, volatility, and risk tolerance to determine the optimal time to lock a forward contract.</p>
+                        </header>
+
+                        <main class="forward-contract-main-content">
+                            <div class="forward-contract-form-card">
+                                <div class="forward-contract-card-header">
+                                    <h3>Contract Details</h3>
+                                </div>
+                                <form id="forwardContractForm" class="forward-contract-form">
+                                    <div class="forward-contract-form-row">
+                                        <div class="forward-contract-form-group">
+                                            <label for="forwardContractAmount">
+                                                <span class="forward-contract-label-icon">💰</span>
+                                                Amount
+                                            </label>
+                                            <input type="number" id="forwardContractAmount" name="amount" placeholder="Enter amount" required>
+                                        </div>
+
+                                        <div class="forward-contract-form-group">
+                                            <label for="forwardContractSettlementDate">
+                                                <span class="forward-contract-label-icon">📅</span>
+                                                Settlement Date
+                                            </label>
+                                            <input type="date" id="forwardContractSettlementDate" name="settlementDate" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="forward-contract-form-row">
+                                        <div class="forward-contract-form-group">
+                                            <label for="forwardContractRiskTolerance">
+                                                <span class="forward-contract-label-icon">⚡</span>
+                                                Risk Tolerance
+                                            </label>
+                                            <select id="forwardContractRiskTolerance" name="riskTolerance" required>
+                                                <option value="">Select risk tolerance</option>
+                                                <option value="low">Low</option>
+                                                <option value="medium">Medium</option>
+                                                <option value="high">High</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="forward-contract-form-group">
+                                            <label for="forwardContractCurrencyPair">
+                                                <span class="forward-contract-label-icon">🌍</span>
+                                                Currency Pair
+                                            </label>
+                                            <select id="forwardContractCurrencyPair" name="currencyPair" required>
+                                                <option value="">Select currency pair</option>
+                                                <option value="USD/EUR">USD/EUR</option>
+                                                <option value="USD/GBP">USD/GBP</option>
+                                                <option value="USD/JPY">USD/JPY</option>
+                                                <option value="USD/INR">USD/INR</option>
+                                                <option value="EUR/GBP">EUR/GBP</option>
+                                                <option value="EUR/JPY">EUR/JPY</option>
+                                                <option value="GBP/JPY">GBP/JPY</option>
+                                            </select>
+                                            <div id="forwardContractCurrencyPrice" class="forward-contract-currency-price"></div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="forward-contract-generate-btn">
+                                        <span>Generate Forward Contract Note</span>
+                                        <span class="forward-contract-btn-arrow">→</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div id="forwardContractResults" class="forward-contract-results-section"></div>
+                        </main>
+                    </div>
+                </div>
+
+                <div class="content-section" id="insuranceSection" style="display: none;">
+                    <section class="insurance-panel insurance-glass">
+                        <h2>Shipment Insurance</h2>
+                        <form id="shipment-form" class="insurance-form-grid">
+                            <label>
+                                Goods category
+                                <select name="goodsType" required>
+                                    <option value="">Select type</option>
+                                    <option value="electronics">Consumer electronics</option>
+                                    <option value="pharmaceuticals">Pharmaceuticals</option>
+                                    <option value="perishables">Perishables / cold chain</option>
+                                    <option value="automotive">Automotive components</option>
+                                    <option value="machinery">Heavy machinery</option>
+                                    <option value="textiles">Textiles & apparel</option>
+                                    <option value="bulk">Bulk commodities</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                Shipment value (USD)
+                                <input type="number" name="shipmentValue" min="1000" step="500"
+                                    placeholder="e.g. 250000" required />
+                            </label>
+
+                            <label>
+                                Origin country
+                                <select id="insurance-origin-country" name="originCountry"
+                                    data-port-target="insurance-origin-port" required>
+                                    <option value="">Select country</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                Origin port
+                                <select id="insurance-origin-port" name="originPort"
+                                    data-manual-input="insurance-origin-port-manual" disabled required>
+                                    <option value="">Select port</option>
+                                </select>
+                                <input type="text" id="insurance-origin-port-manual" class="manual-port"
+                                    placeholder="Enter origin port / UNLOCODE" hidden />
+                            </label>
+
+                            <label>
+                                Destination country
+                                <select id="insurance-destination-country" name="destinationCountry"
+                                    data-port-target="insurance-destination-port" required>
+                                    <option value="">Select country</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                Destination port
+                                <select id="insurance-destination-port" name="destinationPort"
+                                    data-manual-input="insurance-destination-port-manual" disabled required>
+                                    <option value="">Select port</option>
+                                </select>
+                                <input type="text" id="insurance-destination-port-manual" class="manual-port"
+                                    placeholder="Enter destination port / UNLOCODE" hidden />
+                            </label>
+
+                            <label>
+                                Transport mode
+                                <select name="transportMode" required>
+                                    <option value="sea">Ocean freight</option>
+                                    <option value="air">Air freight</option>
+                                    <option value="road">Road</option>
+                                    <option value="rail">Rail</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                Risk tolerance
+                                <select name="riskProfile" required>
+                                    <option value="balanced">Balanced</option>
+                                    <option value="conservative">Conservative</option>
+                                    <option value="aggressive">Cost focused</option>
+                                </select>
+                            </label>
+
+                            <label class="insurance-span-2">
+                                Additional notes
+                                <textarea name="notes" rows="2"
+                                    placeholder="Any packaging specifics, temperature control, high theft risk, etc."></textarea>
+                            </label>
+
+                            <button id="insurance-submit-btn" class="insurance-primary insurance-span-2" type="submit">
+                                Find best-fit insurance
+                            </button>
+                        </form>
+                    </section>
+
+                    <section class="insurance-panel">
+                        <header class="insurance-panel-header">
+                            <div>
+                                <h2>Recommended cover</h2>
+                                <p class="insurance-subtitle">
+                                    Ranked suggestions based on coverage fit, trade lane appetite, and
+                                    premium efficiency.
+                                </p>
+                            </div>
+                            <button id="insurance-export-btn" class="insurance-ghost">Export results</button>
+                        </header>
+                        <div id="insurance-results" class="insurance-results-list empty">
+                            <p>
+                                Complete the form to view tailored marine insurance suggestions and
+                                underwriting rationale.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section class="insurance-panel insurance-secondary">
+                        <h2>How insurance scoring works</h2>
+                        <div class="insurance-score-grid">
+                            <article>
+                                <h3>Coverage adequacy</h3>
+                                <p>
+                                    Matches the declared value and commodity risk level to available
+                                    clauses (ICC A/B/C) and bespoke riders.
+                                </p>
+                            </article>
+                            <article>
+                                <h3>Trade lane appetite</h3>
+                                <p>
+                                    Checks carrier comfort with the origin / destination pair and recent
+                                    loss ratios for that corridor.
+                                </p>
+                            </article>
+                            <article>
+                                <h3>Premium efficiency</h3>
+                                <p>
+                                    Balances total insured value, deductible appetite, and optional
+                                    add-ons to keep per-shipment cost competitive.
+                                </p>
+                            </article>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="content-section" id="productsSection" style="display: none;">
+                    <div class="products-header">
+                        <div>
+                            <h2>Add Your Products</h2>
+                            <p>Publish export-ready products with the specs buyers and customs authorities expect.</p>
+                        </div>
+                        <button type="button" class="btn-secondary" onclick="loadProductsFromFirebase()">
+                            Refresh Catalog
+                        </button>
+                    </div>
+
+                    <div class="products-layout">
+                        <section class="product-form-card">
+                            <div class="product-form-card-header">
+                                <h3>Product Intake Form</h3>
+                                <p>Capture commercial, compliance, and marketing information for each SKU.</p>
+                            </div>
+                            <form id="productForm">
+                                <div class="product-form-grid">
+                                    <div class="form-group">
+                                        <label for="productName">Product Name *</label>
+                                        <input type="text" id="productName" name="productName"
+                                            placeholder="Eg. Organic Basmati Rice" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productCategory">Category</label>
+                                        <select id="productCategory" name="productCategory">
+                                            <option value="">Select category</option>
+                                            <option value="agri">Agri & Food</option>
+                                            <option value="textiles">Textiles & Apparel</option>
+                                            <option value="engineering">Engineering Goods</option>
+                                            <option value="chemicals">Chemicals</option>
+                                            <option value="pharma">Pharma & Life Sciences</option>
+                                            <option value="handicrafts">Handicrafts</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="hsCodeLookup">HS Code</label>
+                                        <input type="text" id="hsCodeLookup" name="hsCode" placeholder="Eg. 10063020">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="targetMarkets">Target Markets</label>
+                                        <input type="text" id="targetMarkets" name="targetMarkets"
+                                            placeholder="Eg. UAE, EU, USA">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="incoterm">Preferred Incoterm</label>
+                                        <select id="incoterm" name="incoterm">
+                                            <option value="">Select incoterm</option>
+                                            <option value="FOB">FOB</option>
+                                            <option value="CIF">CIF</option>
+                                            <option value="CFR">CFR</option>
+                                            <option value="DAP">DAP</option>
+                                            <option value="DDP">DDP</option>
+                                            <option value="EXW">EXW</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="priceCurrency">Price Currency</label>
+                                        <select id="priceCurrency" name="priceCurrency">
+                                            <option value="USD">USD</option>
+                                            <option value="EUR">EUR</option>
+                                            <option value="GBP">GBP</option>
+                                            <option value="AED">AED</option>
+                                            <option value="INR">INR</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="priceValue">Offer Price</label>
+                                        <input type="number" id="priceValue" name="priceValue" step="0.01"
+                                            placeholder="Eg. 1200">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="minOrderQty">Min Order Quantity</label>
+                                        <input type="text" id="minOrderQty" name="minOrderQty"
+                                            placeholder="Eg. 1 x 20ft container">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productionCapacity">Monthly Capacity</label>
+                                        <input type="text" id="productionCapacity" name="productionCapacity"
+                                            placeholder="Eg. 150 MT">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="leadTime">Lead Time</label>
+                                        <input type="text" id="leadTime" name="leadTime"
+                                            placeholder="Eg. 21 days after advance">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="certifications">Certifications</label>
+                                        <input type="text" id="certifications" name="certifications"
+                                            placeholder="Eg. ISO 22000, USDA Organic">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="complianceNotes">Compliance Notes</label>
+                                        <input type="text" id="complianceNotes" name="complianceNotes"
+                                            placeholder="Eg. Meets EU pesticide limits">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="productDescription">Sales Description *</label>
+                                        <textarea id="productDescription" name="productDescription" rows="3"
+                                            placeholder="Buyer-facing overview of the product" required></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="productSpecs">Key Specifications</label>
+                                        <textarea id="productSpecs" name="productSpecs" rows="3"
+                                            placeholder="Moisture %, grade, sizing, ingredients..."></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="packagingDetails">Packaging & Labelling</label>
+                                        <textarea id="packagingDetails" name="packagingDetails" rows="2"
+                                            placeholder="Eg. 25kg laminated bags, bilingual labelling"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="product-image-upload">
+                                    <div class="product-image-copy">
+                                        <label for="productImage">Product Image</label>
+                                        <p>Upload a clean product or lifestyle image (max 5 MB). We convert it to Base64
+                                            to prevent CORS issues.</p>
+                                        <input type="file" id="productImage" accept="image/*">
+                                        <small>Accepted formats: JPG, PNG, WEBP</small>
+                                    </div>
+                                    <div class="product-image-preview" id="productImagePreview">
+                                        <span>No image selected</span>
+                                    </div>
+                                </div>
+
+                                <div class="product-message" id="productFormMessage" role="status" aria-live="polite">
+                                </div>
+                                <button type="submit" id="productSubmitBtn" class="btn-save">Save Product</button>
+                            </form>
+                        </section>
+
+                        <section class="product-list-card">
+                            <div class="product-list-header">
+                                <div>
+                                    <h3>Your Catalog</h3>
+                                    <p>Review and share export-ready listings with buyers.</p>
+                                </div>
+                                <span class="product-count-badge" id="productCountBadge">0 items</span>
+                            </div>
+                            <div id="productListEmpty" class="product-empty-state">
+                                <div class="empty-icon">📦</div>
+                                <p>Add your first product to showcase it internationally.</p>
+                            </div>
+                            <div id="productList" class="product-list"></div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="content-section" id="paymentsSection" style="display: none;">
+                    <div class="panel-card">
+                        <header>
+                            <div>
+                                <h2>Payments & Forward Contracts</h2>
+                                <p>Manage your payments, transactions, and forward contract notes.</p>
+                            </div>
+                        </header>
+                        
+                        <div class="forward-contracts-payment-section">
+                            <div class="forward-contracts-header">
+                                <h3>📄 Forward Contract Notes</h3>
+                                <p>View and download your generated forward contract PDFs</p>
+                            </div>
+                            <div id="forwardContractsList" class="forward-contracts-list">
+                                <div class="forward-contracts-loading" style="text-align: center; padding: 40px;">
+                                    <div class="spinner" style="border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+                                    <p>Loading forward contracts...</p>
+                                </div>
+                            </div>
+                            <div id="forwardContractsEmpty" class="forward-contracts-empty" style="display: none; text-align: center; padding: 60px 20px;">
+                                <div style="font-size: 48px; margin-bottom: 20px;">📋</div>
+                                <h3 style="color: #6b7280; margin-bottom: 10px;">No Forward Contracts Yet</h3>
+                                <p style="color: #9ca3af; margin-bottom: 20px;">Generate your first forward contract note from the Forward Contracts section.</p>
+                                <button onclick="switchTab('contracts')" class="btn-primary" style="padding: 12px 24px; border-radius: 8px; border: none; background: #3b82f6; color: white; cursor: pointer; font-size: 14px; font-weight: 500;">
+                                    Go to Forward Contracts
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <style>
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                    .forward-contracts-payment-section {
+                        margin-top: 30px;
+                    }
+                    .forward-contracts-header {
+                        margin-bottom: 24px;
+                    }
+                    .forward-contracts-header h3 {
+                        font-size: 20px;
+                        font-weight: 600;
+                        color: #111827;
+                        margin-bottom: 8px;
+                    }
+                    .forward-contracts-header p {
+                        color: #6b7280;
+                        font-size: 14px;
+                    }
+                    .forward-contracts-list {
+                        display: grid;
+                        gap: 16px;
+                    }
+                    .forward-contract-card {
+                        background: white;
+                        border: 1px solid #e5e7eb;
+                        border-radius: 12px;
+                        padding: 20px;
+                        transition: all 0.2s;
+                    }
+                    .forward-contract-card:hover {
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                        border-color: #3b82f6;
+                    }
+                    .forward-contract-card-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        margin-bottom: 16px;
+                    }
+                    .forward-contract-card-title {
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: #111827;
+                        margin-bottom: 4px;
+                    }
+                    .forward-contract-card-date {
+                        font-size: 12px;
+                        color: #6b7280;
+                    }
+                    .forward-contract-card-badge {
+                        padding: 4px 12px;
+                        border-radius: 12px;
+                        font-size: 12px;
+                        font-weight: 500;
+                        background: #d1fae5;
+                        color: #065f46;
+                    }
+                    .forward-contract-card-details {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                        gap: 12px;
+                        margin-bottom: 16px;
+                    }
+                    .forward-contract-detail-item {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    .forward-contract-detail-label {
+                        font-size: 12px;
+                        color: #6b7280;
+                        margin-bottom: 4px;
+                    }
+                    .forward-contract-detail-value {
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: #111827;
+                    }
+                    .forward-contract-card-actions {
+                        display: flex;
+                        gap: 12px;
+                        margin-top: 16px;
+                    }
+                    .forward-contract-action-btn {
+                        padding: 10px 20px;
+                        border-radius: 8px;
+                        border: none;
+                        font-size: 14px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        transition: all 0.2s;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                    }
+                    .forward-contract-action-btn-primary {
+                        background: #3b82f6;
+                        color: white;
+                    }
+                    .forward-contract-action-btn-primary:hover {
+                        background: #2563eb;
+                    }
+                    .forward-contract-action-btn-secondary {
+                        background: #f3f4f6;
+                        color: #374151;
+                    }
+                    .forward-contract-action-btn-secondary:hover {
+                        background: #e5e7eb;
+                    }
+                </style>
+
+                <div class="content-section" id="documentsSection" style="display: none;">
+                    <div class="documents-header">
+                        <div class="documents-title">
+                            <h2>Document Library</h2>
+                            <p>All documents uploaded from your profile and product submissions</p>
+                        </div>
+                        <div class="documents-actions">
+                            <div class="documents-search">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.35-4.35"></path>
+                                </svg>
+                                <input type="text" id="documentSearch" placeholder="Search documents...">
+                            </div>
+                            <select id="documentFilter" class="documents-filter">
+                                <option value="">All Documents</option>
+                                <option value="iec">IEC Certificate</option>
+                                <option value="gst">GST Certificate</option>
+                                <option value="company">Company Registration</option>
+                                <option value="idproof">ID Proof</option>
+                                <option value="addressproof">Address Proof</option>
+                                <option value="bankstatement">Bank Statement</option>
+                                <option value="canchelaque">Cancelled Cheque</option>
+                                <option value="insurance">Insurance</option>
+                                <option value="invoice">Invoice</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="documentsLoading" class="documents-loading" style="display: none;">
+                        <div class="loading-spinner"></div>
+                        <p>Loading documents...</p>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="documentsEmpty" class="documents-empty">
+                        <div class="empty-icon">📄</div>
+                        <h3>No documents yet</h3>
+                        <p>Documents you upload from your profile will appear here</p>
+                    </div>
+
+                    <!-- Documents Grid -->
+                    <div id="documentsGrid" class="documents-grid" style="display: none;"></div>
+
+                    <!-- Statistics -->
+                    <div id="documentsStats" class="documents-stats" style="display: none;">
+                        <div class="stat">
+                            <span class="stat-label">Total Documents</span>
+                            <span class="stat-value" id="totalDocuments">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Total Size</span>
+                            <span class="stat-value" id="totalSize">0 MB</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Document Types</span>
+                            <span class="stat-value" id="typeCount">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Document Intel Section -->
+                    <section class="documents-intel-section">
+                        <div class="document-related-section">
+                            <div class="document-related-header">
+                                <div>
+                                    <h3>Country & Port Requirements</h3>
+                                    <p>Cross-check official export/import documents per corridor using trusted
+                                        government sources.</p>
+                                </div>
+                                <div class="document-related-controls">
+                                    <div class="form-group">
+                                        <label for="docCountrySelect">Country</label>
+                                        <select id="docCountrySelect"
+                                            aria-label="Select country for requirements"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="docModeSelect">Mode</label>
+                                        <select id="docModeSelect" aria-label="Select transport mode"></select>
+                                    </div>
+                                    <button class="btn-secondary" type="button" onclick="generateDocumentChecklist()"
+                                        aria-label="Generate document checklist">
+                                        Generate Checklist
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="docRequirementsTable" class="doc-requirements-table" role="region"
+                                aria-live="polite"></div>
+                            <div id="docChecklistResult" class="doc-checklist-result" role="status" aria-live="polite">
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="content-section" id="analyticsSection" style="display: none;">
+                    <div class="analytics-header">
+                        <div>
+                            <h2>Analytics Command Center</h2>
+                            <p>Track product readiness, document coverage, and export focus based on your live data.</p>
+                        </div>
+                        <div class="analytics-header-actions">
+                            <span class="analytics-timestamp" id="analyticsLastRefreshed">Waiting for first
+                                refresh…</span>
+                            <button type="button" class="btn-secondary" id="analyticsRefreshBtn">Refresh data</button>
+                        </div>
+                    </div>
+
+                    <div id="analyticsLoading" class="analytics-loading" style="display: none;">
+                        <div class="loading-spinner"></div>
+                        <p>Generating insights from Firebase…</p>
+                    </div>
+
+                    <div id="analyticsEmpty" class="analytics-empty">
+                        <div class="empty-icon">📊</div>
+                        <h3>No analytics yet</h3>
+                        <p>Add products or documents to unlock tailored insights.</p>
+                    </div>
+
+                    <div id="analyticsContent" class="analytics-content" style="display: none;">
+                        <div class="analytics-stats-grid">
+                            <article class="analytics-stat-card">
+                                <span>Total Products</span>
+                                <strong id="analyticsProductCount">0</strong>
+                                <p id="analyticsCatalogValue">Catalog value: —</p>
+                            </article>
+                            <article class="analytics-stat-card">
+                                <span>Documents on File</span>
+                                <strong id="analyticsDocumentCount">0</strong>
+                                <p id="analyticsDocumentCoverage">Coverage: —</p>
+                            </article>
+                            <article class="analytics-stat-card">
+                                <span>Average Offer Price</span>
+                                <strong id="analyticsAvgPrice">—</strong>
+                                <p id="analyticsPriceRange">Range: —</p>
+                            </article>
+                            <article class="analytics-stat-card">
+                                <span>Top Incoterm</span>
+                                <strong id="analyticsTopIncoterm">—</strong>
+                                <p id="analyticsComplianceStatus">Compliance: —</p>
+                            </article>
+                        </div>
+
+                        <div class="analytics-panels-grid">
+                            <section class="analytics-panel">
+                                <div class="analytics-panel-header">
+                                    <h3>Target Market Focus</h3>
+                                </div>
+                                <ul id="analyticsMarketList" class="analytics-list"></ul>
+                            </section>
+
+                            <section class="analytics-panel">
+                                <div class="analytics-panel-header">
+                                    <h3>Incoterms & Capacity</h3>
+                                </div>
+                                <ul id="analyticsIncotermList" class="analytics-list"></ul>
+                            </section>
+
+                            <section class="analytics-panel">
+                                <div class="analytics-panel-header">
+                                    <h3>Document Coverage</h3>
+                                </div>
+                                <ul id="analyticsDocumentList" class="analytics-list"></ul>
+                            </section>
+
+                            <section class="analytics-panel">
+                                <div class="analytics-panel-header">
+                                    <h3>Recent Product Updates</h3>
+                                </div>
+                                <ul id="analyticsRecentProducts" class="analytics-list"></ul>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="supportSection" style="display: none;">
+                    <div class="support-header">
+                        <div>
+                            <h2>Support Center</h2>
+                            <p>Your unified space for instant answers, live assistance, and FAQs.</p>
+                        </div>
+                        <div class="support-status-indicator" id="supportStatusIndicator">
+                            <span class="status-dot offline"></span>
+                            <span id="supportStatusLabel">Checking agent availability...</span>
+                        </div>
+                    </div>
+
+                    <div class="support-layout">
+                        <section class="support-chat-panel">
+                            <div class="support-chat-header">
+                                <div>
+                                    <h3>Smart Support Chat</h3>
+                                    <p id="supportChatHelperText">Hi! I’m your support assistant. How can I help you
+                                        today?</p>
+                                </div>
+                                <button type="button" class="support-pill" id="supportLiveBadge" disabled>
+                                    <span class="pill-dot"></span>
+                                    <span id="supportLiveBadgeText">Bot Assisting</span>
+                                </button>
+                            </div>
+                            <div class="support-chat-window" id="supportChatWindow">
+                                <div class="support-chat-messages" id="supportMessages"></div>
+                                <div class="support-chat-typing" id="supportBotTyping" style="display: none;">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                            <form id="supportChatForm" class="support-chat-input" autocomplete="off">
+                                <input type="text" id="supportMessageInput" placeholder="Type your message..."
+                                    aria-label="Message support" autocomplete="off">
+                                <button type="submit">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                    </svg>
+                                </button>
+                            </form>
+                        </section>
+
+                        
+                    </div>
+                </div>
+
+                
+            </main>
+        </div>
+    </div>
+
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="others.js"></script>
+</body>
+
+</html>

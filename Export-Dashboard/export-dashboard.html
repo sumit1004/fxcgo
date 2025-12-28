@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FXcgo</title>
+    <link rel="shortcut icon" href="../assets/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="dashboard-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="shortcut icon" href="/assets/logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <!-- Dashboard Layout -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="../index.html" style="text-decoration: none;"><img src="../assets/logo-1.png" alt="" width="40px"><span class="logo-text">FXcgo</span></a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#dashboard" class="nav-link active" data-tab="dashboard">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contracts" class="nav-link" data-tab="contracts">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            <span>Forward Contracts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#insurance" class="nav-link" data-tab="insurance">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            <span>Insurance</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#documents" class="nav-link" data-tab="documents">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            <span>Documents</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#products" class="nav-link" data-tab="products">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                </path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                            <span>Add Your Products</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#support" class="nav-link" data-tab="support">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                            <span>Support</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../marketplace/marketplace.html" class="nav-link" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 7h18"></path>
+                                <path d="M6 7V3h12v4"></path>
+                                <path d="M5 7l1.68 12.06A2 2 0 0 0 8.66 21h6.68a2 2 0 0 0 1.98-1.94L19 7"></path>
+                            </svg>
+                            <span>Marketplace</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#cart" class="nav-link" data-tab="cart">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                            <span>My Cart</span>
+                            <span class="nav-badge" id="exporterCartBadge" style="display: none;">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#incoming-orders" class="nav-link" data-tab="incoming-orders">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span>Incoming Orders</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="dashboard-main">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <h1 class="page-title" id="pageTitle">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="notification-dropdown">
+                        <button class="notification-btn" id="notificationBtn" aria-label="Notifications" onclick="toggleNotificationDropdown()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+                        <div class="notification-dropdown-menu" id="notificationDropdown">
+                            <div class="notification-dropdown-header">
+                                <h3>Notifications</h3>
+                                <button class="notification-mark-all-read" onclick="markAllNotificationsRead()">Mark all as read</button>
+                            </div>
+                            <div class="notification-list" id="notificationList">
+                                <div class="notification-empty">
+                                    <p>No notifications</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-dropdown">
+                        <button class="profile-btn" id="profileBtn" onclick="openProfileModal()" aria-label="Profile">
+                            <div class="profile-avatar" id="profileAvatar">
+                                <span id="avatarInitials">U</span>
+                            </div>
+                            <span class="profile-name" id="profileName">User</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="dashboard-content">
+                <div class="content-section active" id="dashboardSection">
+                    <div class="welcome-card">
+                        <h2>Welcome back, <span id="welcomeName">Exporter</span>!</h2>
+                        <p>Manage your exports, contracts, and global-ready product catalog from one place.</p>
+                    </div>
+
+                    <!-- eKYC Section -->
+                    <div class="ekyc-section" id="ekycSection">
+                        <div class="ekyc-card" id="ekycCard">
+                            <div class="ekyc-content">
+                                <div class="ekyc-icon">🔐</div>
+                                <div class="ekyc-text">
+                                    <h3>Complete Your eKYC Verification</h3>
+                                    <p>Verify your identity to access all features and services.</p>
+                                </div>
+                            </div>
+                            <button class="btn-ekyc" id="ekycButton" onclick="handleEKYCButtonClick()">Complete
+                                eKYC</button>
+                        </div>
+                        <div class="ekyc-status-card" id="ekycStatusCard" style="display: none;">
+                            <div class="ekyc-status-content">
+                                <div class="ekyc-status-icon" id="ekycStatusIcon">✓</div>
+                                <div class="ekyc-status-text">
+                                    <h3 id="ekycStatusTitle">eKYC Status</h3>
+                                    <p id="ekycStatusMessage">Your eKYC verification status will appear here.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Call Request Button (shown after eKYC submission) -->
+                        <div id="videoCallRequestCard" class="video-call-request-card" style="display: none;">
+                            <div class="video-call-request-content">
+                                <div class="request-icon">📹</div>
+                                <div class="request-text">
+                                    <h3>Complete Your Verification</h3>
+                                    <p>Schedule a video call with our agent to verify your identity and complete your
+                                        eKYC.</p>
+                                </div>
+                                <button class="btn-request-call" onclick="requestVideoCall()">Request Video
+                                    Call</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-info">
+                                <h3>Active Contracts</h3>
+                                <p class="stat-value">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🚢</div>
+                            <div class="stat-info">
+                                <h3>Active Products</h3>
+                                <p class="stat-value">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-info">
+                                <h3>Total Value</h3>
+                                <p class="stat-value">$0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📈</div>
+                            <div class="stat-info">
+                                <h3>This Month</h3>
+                                <p class="stat-value">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forward Contracts Section -->
+                <div class="content-section" id="contractsSection" style="display: none;">
+                    <div class="forward-contract-container">
+                        <header class="forward-contract-hero">
+                            <div class="forward-contract-hero-icon">💱</div>
+                            <h2>Forward Contract Note Generator</h2>
+                            <p class="forward-contract-subheadline">Analyze FX trends, volatility, and risk tolerance to determine the optimal time to lock a forward contract.</p>
+                        </header>
+
+                        <main class="forward-contract-main-content">
+                            <div class="forward-contract-form-card">
+                                <div class="forward-contract-card-header">
+                                    <h3>Contract Details</h3>
+                                </div>
+                                <form id="forwardContractForm" class="forward-contract-form">
+                                    <div class="forward-contract-form-row">
+                                        <div class="forward-contract-form-group">
+                                            <label for="forwardContractAmount">
+                                                <span class="forward-contract-label-icon">💰</span>
+                                                Amount
+                                            </label>
+                                            <input type="number" id="forwardContractAmount" name="amount" placeholder="Enter amount" required>
+                                        </div>
+
+                                        <div class="forward-contract-form-group">
+                                            <label for="forwardContractSettlementDate">
+                                                <span class="forward-contract-label-icon">📅</span>
+                                                Settlement Date
+                                            </label>
+                                            <input type="date" id="forwardContractSettlementDate" name="settlementDate" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="forward-contract-form-row">
+                                        <div class="forward-contract-form-group">
+                                            <label for="forwardContractRiskTolerance">
+                                                <span class="forward-contract-label-icon">⚡</span>
+                                                Risk Tolerance
+                                            </label>
+                                            <select id="forwardContractRiskTolerance" name="riskTolerance" required>
+                                                <option value="">Select risk tolerance</option>
+                                                <option value="low">Low</option>
+                                                <option value="medium">Medium</option>
+                                                <option value="high">High</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="forward-contract-form-group">
+                                            <label for="forwardContractCurrencyPair">
+                                                <span class="forward-contract-label-icon">🌍</span>
+                                                Currency Pair
+                                            </label>
+                                            <select id="forwardContractCurrencyPair" name="currencyPair" required>
+                                                <option value="">Select currency pair</option>
+                                                <option value="USD/EUR">USD/EUR</option>
+                                                <option value="USD/GBP">USD/GBP</option>
+                                                <option value="USD/JPY">USD/JPY</option>
+                                                <option value="USD/INR">USD/INR</option>
+                                                <option value="EUR/GBP">EUR/GBP</option>
+                                                <option value="EUR/JPY">EUR/JPY</option>
+                                                <option value="GBP/JPY">GBP/JPY</option>
+                                            </select>
+                                            <div id="forwardContractCurrencyPrice" class="forward-contract-currency-price"></div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="forward-contract-generate-btn">
+                                        <span>Generate Forward Contract Note</span>
+                                        <span class="forward-contract-btn-arrow">→</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div id="forwardContractResults" class="forward-contract-results-section"></div>
+                        </main>
+                    </div>
+                </div>
+
+                <div class="content-section" id="insuranceSection" style="display: none;">
+                    <section class="insurance-panel insurance-glass">
+                        <h2>Shipment Insurance</h2>
+                        <form id="shipment-form" class="insurance-form-grid">
+                            <label>
+                                Goods category
+                                <select name="goodsType" required>
+                                    <option value="">Select type</option>
+                                    <option value="electronics">Consumer electronics</option>
+                                    <option value="pharmaceuticals">Pharmaceuticals</option>
+                                    <option value="perishables">Perishables / cold chain</option>
+                                    <option value="automotive">Automotive components</option>
+                                    <option value="machinery">Heavy machinery</option>
+                                    <option value="textiles">Textiles & apparel</option>
+                                    <option value="bulk">Bulk commodities</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                Shipment value (USD)
+                                <input type="number" name="shipmentValue" min="1000" step="500"
+                                    placeholder="e.g. 250000" required />
+                            </label>
+
+                            <label>
+                                Origin country
+                                <select id="insurance-origin-country" name="originCountry"
+                                    data-port-target="insurance-origin-port" required>
+                                    <option value="">Select country</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                Origin port
+                                <select id="insurance-origin-port" name="originPort"
+                                    data-manual-input="insurance-origin-port-manual" disabled required>
+                                    <option value="">Select port</option>
+                                </select>
+                                <input type="text" id="insurance-origin-port-manual" class="manual-port"
+                                    placeholder="Enter origin port / UNLOCODE" hidden />
+                            </label>
+
+                            <label>
+                                Destination country
+                                <select id="insurance-destination-country" name="destinationCountry"
+                                    data-port-target="insurance-destination-port" required>
+                                    <option value="">Select country</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                Destination port
+                                <select id="insurance-destination-port" name="destinationPort"
+                                    data-manual-input="insurance-destination-port-manual" disabled required>
+                                    <option value="">Select port</option>
+                                </select>
+                                <input type="text" id="insurance-destination-port-manual" class="manual-port"
+                                    placeholder="Enter destination port / UNLOCODE" hidden />
+                            </label>
+
+                            <label>
+                                Transport mode
+                                <select name="transportMode" required>
+                                    <option value="sea">Ocean freight</option>
+                                    <option value="air">Air freight</option>
+                                    <option value="road">Road</option>
+                                    <option value="rail">Rail</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                Risk tolerance
+                                <select name="riskProfile" required>
+                                    <option value="balanced">Balanced</option>
+                                    <option value="conservative">Conservative</option>
+                                    <option value="aggressive">Cost focused</option>
+                                </select>
+                            </label>
+
+                            <label class="insurance-span-2">
+                                Additional notes
+                                <textarea name="notes" rows="2"
+                                    placeholder="Any packaging specifics, temperature control, high theft risk, etc."></textarea>
+                            </label>
+
+                            <button id="insurance-submit-btn" class="insurance-primary insurance-span-2" type="submit">
+                                Find best-fit insurance
+                            </button>
+                        </form>
+                    </section>
+
+                    <section class="insurance-panel">
+                        <header class="insurance-panel-header">
+                            <div>
+                                <h2>Recommended cover</h2>
+                                <p class="insurance-subtitle">
+                                    Ranked suggestions based on coverage fit, trade lane appetite, and
+                                    premium efficiency.
+                                </p>
+                            </div>
+                            <button id="insurance-export-btn" class="insurance-ghost">Export results</button>
+                        </header>
+                        <div id="insurance-results" class="insurance-results-list empty">
+                            <p>
+                                Complete the form to view tailored marine insurance suggestions and
+                                underwriting rationale.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section class="insurance-panel insurance-secondary">
+                        <h2>How insurance scoring works</h2>
+                        <div class="insurance-score-grid">
+                            <article>
+                                <h3>Coverage adequacy</h3>
+                                <p>
+                                    Matches the declared value and commodity risk level to available
+                                    clauses (ICC A/B/C) and bespoke riders.
+                                </p>
+                            </article>
+                            <article>
+                                <h3>Trade lane appetite</h3>
+                                <p>
+                                    Checks carrier comfort with the origin / destination pair and recent
+                                    loss ratios for that corridor.
+                                </p>
+                            </article>
+                            <article>
+                                <h3>Premium efficiency</h3>
+                                <p>
+                                    Balances total insured value, deductible appetite, and optional
+                                    add-ons to keep per-shipment cost competitive.
+                                </p>
+                            </article>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="content-section" id="productsSection" style="display: none;">
+                    <div class="products-header">
+                        <div>
+                            <h2>Add Your Products</h2>
+                            <p>Publish export-ready products with the specs buyers and customs authorities expect.</p>
+                        </div>
+                        <button type="button" class="btn-secondary" onclick="loadProductsFromFirebase()">
+                            Refresh Catalog
+                        </button>
+                    </div>
+
+                    <div class="products-layout">
+                        <section class="product-form-card">
+                            <div class="product-form-card-header">
+                                <h3>Product Intake Form</h3>
+                                <p>Capture commercial, compliance, and marketing information for each SKU.</p>
+                            </div>
+                            <form id="productForm">
+                                <div class="product-form-grid">
+                                    <div class="form-group">
+                                        <label for="productName">Product Name *</label>
+                                        <input type="text" id="productName" name="productName"
+                                            placeholder="Eg. Organic Basmati Rice" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productCategory">Category</label>
+                                        <select id="productCategory" name="productCategory">
+                                            <option value="">Select category</option>
+                                            <option value="agri">Agri & Food</option>
+                                            <option value="textiles">Textiles & Apparel</option>
+                                            <option value="engineering">Engineering Goods</option>
+                                            <option value="chemicals">Chemicals</option>
+                                            <option value="pharma">Pharma & Life Sciences</option>
+                                            <option value="handicrafts">Handicrafts</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="hsCodeLookup">HS Code</label>
+                                        <input type="text" id="hsCodeLookup" name="hsCode" placeholder="Eg. 10063020">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="targetMarkets">Target Markets</label>
+                                        <input type="text" id="targetMarkets" name="targetMarkets"
+                                            placeholder="Eg. UAE, EU, USA">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="incoterm">Preferred Incoterm</label>
+                                        <select id="incoterm" name="incoterm">
+                                            <option value="">Select incoterm</option>
+                                            <option value="FOB">FOB</option>
+                                            <option value="CIF">CIF</option>
+                                            <option value="CFR">CFR</option>
+                                            <option value="DAP">DAP</option>
+                                            <option value="DDP">DDP</option>
+                                            <option value="EXW">EXW</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="priceCurrency">Price Currency</label>
+                                        <select id="priceCurrency" name="priceCurrency">
+                                            <option value="USD">USD</option>
+                                            <option value="EUR">EUR</option>
+                                            <option value="GBP">GBP</option>
+                                            <option value="AED">AED</option>
+                                            <option value="INR">INR</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="priceValue">Offer Price</label>
+                                        <input type="number" id="priceValue" name="priceValue" step="0.01"
+                                            placeholder="Eg. 1200">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="minOrderQty">Min Order Quantity</label>
+                                        <input type="text" id="minOrderQty" name="minOrderQty"
+                                            placeholder="Eg. 1 x 20ft container">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productionCapacity">Monthly Capacity</label>
+                                        <input type="text" id="productionCapacity" name="productionCapacity"
+                                            placeholder="Eg. 150 MT">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="leadTime">Lead Time</label>
+                                        <input type="text" id="leadTime" name="leadTime"
+                                            placeholder="Eg. 21 days after advance">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="certifications">Certifications</label>
+                                        <input type="text" id="certifications" name="certifications"
+                                            placeholder="Eg. ISO 22000, USDA Organic">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="complianceNotes">Compliance Notes</label>
+                                        <input type="text" id="complianceNotes" name="complianceNotes"
+                                            placeholder="Eg. Meets EU pesticide limits">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="productDescription">Sales Description *</label>
+                                        <textarea id="productDescription" name="productDescription" rows="3"
+                                            placeholder="Buyer-facing overview of the product" required></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="productSpecs">Key Specifications</label>
+                                        <textarea id="productSpecs" name="productSpecs" rows="3"
+                                            placeholder="Moisture %, grade, sizing, ingredients..."></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="packagingDetails">Packaging & Labelling</label>
+                                        <textarea id="packagingDetails" name="packagingDetails" rows="2"
+                                            placeholder="Eg. 25kg laminated bags, bilingual labelling"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="product-image-upload">
+                                    <div class="product-image-copy">
+                                        <label for="productImage">Product Image</label>
+                                        <p>Upload a clean product or lifestyle image (max 5 MB). We convert it to Base64
+                                            to prevent CORS issues.</p>
+                                        <input type="file" id="productImage" accept="image/*">
+                                        <small>Accepted formats: JPG, PNG, WEBP</small>
+                                    </div>
+                                    <div class="product-image-preview" id="productImagePreview">
+                                        <span>No image selected</span>
+                                    </div>
+                                </div>
+
+                                <div class="product-message" id="productFormMessage" role="status" aria-live="polite">
+                                </div>
+                                <button type="submit" id="productSubmitBtn" class="btn-save">Save Product</button>
+                            </form>
+                        </section>
+
+                        <section class="product-list-card">
+                            <div class="product-list-header">
+                                <div>
+                                    <h3>Your Catalog</h3>
+                                    <p>Review and share export-ready listings with buyers.</p>
+                                </div>
+                                <span class="product-count-badge" id="productCountBadge">0 items</span>
+                            </div>
+                            <div id="productListEmpty" class="product-empty-state">
+                                <div class="empty-icon">📦</div>
+                                <p>Add your first product to showcase it internationally.</p>
+                            </div>
+                            <div id="productList" class="product-list"></div>
+                        </section>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="documentsSection" style="display: none;">
+                    <div class="documents-header">
+                        <div class="documents-title">
+                            <h2>Document Library</h2>
+                            <p>All documents uploaded from your profile and product submissions</p>
+                        </div>
+                        <div class="documents-actions">
+                            <div class="documents-search">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.35-4.35"></path>
+                                </svg>
+                                <input type="text" id="documentSearch" placeholder="Search documents...">
+                            </div>
+                            <select id="documentFilter" class="documents-filter">
+                                <option value="">All Documents</option>
+                                <option value="iec">IEC Certificate</option>
+                                <option value="gst">GST Certificate</option>
+                                <option value="company">Company Registration</option>
+                                <option value="idproof">ID Proof</option>
+                                <option value="addressproof">Address Proof</option>
+                                <option value="bankstatement">Bank Statement</option>
+                                <option value="canchelaque">Cancelled Cheque</option>
+                                <option value="insurance">Insurance</option>
+                                <option value="invoice">Invoice</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="documentsLoading" class="documents-loading" style="display: none;">
+                        <div class="loading-spinner"></div>
+                        <p>Loading documents...</p>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="documentsEmpty" class="documents-empty">
+                        <div class="empty-icon">📄</div>
+                        <h3>No documents yet</h3>
+                        <p>Documents you upload from your profile will appear here</p>
+                    </div>
+
+                    <!-- Documents Grid -->
+                    <div id="documentsGrid" class="documents-grid" style="display: none;"></div>
+
+                    <!-- Statistics -->
+                    <div id="documentsStats" class="documents-stats" style="display: none;">
+                        <div class="stat">
+                            <span class="stat-label">Total Documents</span>
+                            <span class="stat-value" id="totalDocuments">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Total Size</span>
+                            <span class="stat-value" id="totalSize">0 MB</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Document Types</span>
+                            <span class="stat-value" id="typeCount">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Document Intel Section -->
+                    <section class="documents-intel-section">
+                        <div class="document-related-section">
+                            <div class="document-related-header">
+                                <div>
+                                    <h3>Country & Port Requirements</h3>
+                                    <p>Cross-check official export/import documents per corridor using trusted
+                                        government sources.</p>
+                                </div>
+                                <div class="document-related-controls">
+                                    <div class="form-group">
+                                        <label for="docCountrySelect">Country</label>
+                                        <select id="docCountrySelect"
+                                            aria-label="Select country for requirements"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="docModeSelect">Mode</label>
+                                        <select id="docModeSelect" aria-label="Select transport mode"></select>
+                                    </div>
+                                    <button class="btn-secondary" type="button" onclick="generateDocumentChecklist()"
+                                        aria-label="Generate document checklist">
+                                        Generate Checklist
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="docRequirementsTable" class="doc-requirements-table" role="region"
+                                aria-live="polite"></div>
+                            <div id="docChecklistResult" class="doc-checklist-result" role="status" aria-live="polite">
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+
+                <div class="content-section" id="supportSection" style="display: none;">
+                    <div class="support-header">
+                        <div>
+                            <h2>Support Center</h2>
+                            <p>Your unified space for instant answers, live assistance, and FAQs.</p>
+                        </div>
+                        <div class="support-status-indicator" id="supportStatusIndicator">
+                            <span class="status-dot offline"></span>
+                            <span id="supportStatusLabel">Checking agent availability...</span>
+                        </div>
+                    </div>
+
+                    <div class="support-layout">
+                        <section class="support-chat-panel">
+                            <div class="support-chat-header">
+                                <div>
+                                    <h3>Smart Support Chat</h3>
+                                    <p id="supportChatHelperText">Hi! I’m your support assistant. How can I help you
+                                        today?</p>
+                                </div>
+                                <button type="button" class="support-pill" id="supportLiveBadge" disabled>
+                                    <span class="pill-dot"></span>
+                                    <span id="supportLiveBadgeText">Bot Assisting</span>
+                                </button>
+                            </div>
+                            <div class="support-chat-window" id="supportChatWindow">
+                                <div class="support-chat-messages" id="supportMessages"></div>
+                                <div class="support-chat-typing" id="supportBotTyping" style="display: none;">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                            <form id="supportChatForm" class="support-chat-input" autocomplete="off">
+                                <input type="text" id="supportMessageInput" placeholder="Type your message..."
+                                    aria-label="Message support" autocomplete="off">
+                                <button type="submit">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                    </svg>
+                                </button>
+                            </form>
+                        </section>
+
+                        <section class="support-faq-panel">
+                            <div class="support-faq-header">
+                                <h3>FAQs & Quick Answers</h3>
+                                <p>Tap a question to expand.</p>
+                            </div>
+                            <div class="support-faq-accordion" id="supportFaqList"></div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="content-section" id="cartSection" style="display: none;">
+                    <div class="panel-card">
+                        <header>
+                            <div>
+                                <h2>Shopping Cart</h2>
+                                <p>Products you've added from the marketplace</p>
+                            </div>
+                            <div style="display: flex; gap: 1rem;">
+                                <button class="btn-secondary" onclick="loadOrderHistory()" style="padding: 8px 16px; border-radius: 8px; border: 1px solid #e0e0e0; background: white; cursor: pointer;">
+                                    Order History
+                                </button>
+                            </div>
+                        </header>
+                        
+                        <!-- Order History Section -->
+                        <div id="orderHistorySection" style="display: none; margin-bottom: 2rem;">
+                            <h3 style="margin-bottom: 1rem; color: #333;">Order History</h3>
+                            <div id="orderHistoryList" class="order-history-list"></div>
+                            <button class="btn-secondary" onclick="showCartItems()" style="margin-top: 1rem; padding: 8px 16px;">
+                                Back to Cart
+                            </button>
+                        </div>
+
+                        <!-- Cart Items Section -->
+                        <div id="cartItemsSection">
+                            <div id="exporterCartContent">
+                                <div class="cart-empty">
+                                    <div class="empty-icon">🛒</div>
+                                    <h3>Your cart is empty</h3>
+                                    <p>Add products from the marketplace to see them here</p>
+                                    <a href="../marketplace/marketplace.html" target="_blank" class="btn-primary " style="margin-top: 1rem; display: inline-block; text-decoration: none; padding: 6px;
+                                    border-radius: 10px;
+                                    text-decoration: none;">
+                                        Go to Marketplace
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="exporterCartFooter"
+                                style="display: none; margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                                    <span style="font-size: 1.25rem; font-weight: 600;">Total:</span>
+                                    <strong id="exporterCartTotal" style="font-size: 1.5rem; color: #667eea;">$0.00</strong>
+                                </div>
+                                <button class="btn-primary full-width cart-btn" onclick="proceedExporterCheckout()">Proceed
+                                    to Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Incoming Orders Section -->
+                <div class="content-section" id="incomingOrdersSection" style="display: none;">
+                    <div class="panel-card">
+                        <header>
+                            <div>
+                                <h2>Incoming Orders</h2>
+                                <p>Orders placed for your products from the marketplace</p>
+                            </div>
+                        </header>
+                        <div id="incomingOrdersList" class="incoming-orders-list">
+                            <div style="text-align: center; padding: 3rem;">
+                                <div class="loading-spinner" style="display: none; margin: 0 auto 1rem;"></div>
+                                <p>Loading orders...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="profile-modal" role="dialog" aria-labelledby="profileModalTitle" aria-hidden="true">
+        <div class="profile-modal-overlay" onclick="closeProfileModal()"></div>
+        <div class="profile-modal-container">
+            <button class="profile-modal-close" onclick="closeProfileModal()" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="profile-modal-content">
+                <div class="profile-modal-header">
+                    <h2 id="profileModalTitle">Profile Settings</h2>
+                    <p>Manage your exporter profile and account settings</p>
+                </div>
+
+                <!-- Profile Tabs -->
+                <div class="profile-tabs">
+                    <button class="profile-tab active" data-section="basic" onclick="switchProfileTab('basic')">Basic
+                        Info</button>
+                    <button class="profile-tab" data-section="business"
+                        onclick="switchProfileTab('business')">Business</button>
+                    <button class="profile-tab" data-section="compliance"
+                        onclick="switchProfileTab('compliance')">Compliance</button>
+                    <button class="profile-tab" data-section="products"
+                        onclick="switchProfileTab('products')">Products</button>
+                    <button class="profile-tab" data-section="address"
+                        onclick="switchProfileTab('address')">Address</button>
+                    <button class="profile-tab" data-section="banking"
+                        onclick="switchProfileTab('banking')">Banking</button>
+                    <button class="profile-tab" data-section="documents"
+                        onclick="switchProfileTab('documents')">Documents</button>
+                    <button class="profile-tab" data-section="settings"
+                        onclick="switchProfileTab('settings')">Settings</button>
+                </div>
+
+                <!-- Profile Sections -->
+                <div class="profile-sections">
+                    <!-- 1. Basic Information -->
+                    <div id="basicSection" class="profile-section active">
+                        <h3>Basic Information</h3>
+                        <form id="basicInfoForm" onsubmit="saveBasicInfo(event)">
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profilePhoto">Profile Photo</label>
+                                <div class="photo-upload-wrapper">
+                                    <div class="photo-preview" id="photoPreview">
+                                        <img id="photoPreviewImg" src="" alt="Profile photo" style="display: none;">
+                                        <span id="photoPreviewText">No photo</span>
+                                    </div>
+                                    <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*"
+                                        onchange="handlePhotoUpload(event)">
+                                    <label for="profilePhoto" class="upload-btn">Upload Photo</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneNumber">Phone Number *</label>
+                                <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="alternatePhone">Alternate Phone</label>
+                                <input type="tel" id="alternatePhone" name="alternatePhone">
+                            </div>
+                            <button type="submit" class="btn-save">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- 2. Business Details -->
+                    <div id="businessSection" class="profile-section">
+                        <h3>Business Details</h3>
+                        <form id="businessForm" onsubmit="saveBusinessInfo(event)">
+                            <div class="form-group">
+                                <label for="companyName">Company Name *</label>
+                                <input type="text" id="companyName" name="companyName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="businessType">Business Type *</label>
+                                <select id="businessType" name="businessType" required>
+                                    <option value="">Select Business Type</option>
+                                    <option value="sole-proprietorship">Sole Proprietorship</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="pvt-ltd">Pvt Ltd</option>
+                                    <option value="llp">LLP</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="yearEstablished">Year of Establishment *</label>
+                                <input type="number" id="yearEstablished" name="yearEstablished" min="1900" max="2025"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="businessCategory">Business Category *</label>
+                                <select id="businessCategory" name="businessCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="agriculture">Agriculture</option>
+                                    <option value="textile">Textile</option>
+                                    <option value="machinery">Machinery</option>
+                                    <option value="electronics">Electronics</option>
+                                    <option value="pharmaceuticals">Pharmaceuticals</option>
+                                    <option value="chemicals">Chemicals</option>
+                                    <option value="food">Food & Beverages</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="companyWebsite">Company Website</label>
+                                <input type="url" id="companyWebsite" name="companyWebsite"
+                                    placeholder="https://example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="companyDescription">Company Description</label>
+                                <textarea id="companyDescription" name="companyDescription" rows="4"
+                                    placeholder="Brief description of your company"></textarea>
+                            </div>
+                            <button type="submit" class="btn-save">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- 3. Compliance & Government IDs -->
+                    <div id="complianceSection" class="profile-section">
+                        <h3>Compliance & Government IDs</h3>
+                        <form id="complianceForm" onsubmit="saveComplianceInfo(event)">
+                            <div class="form-group">
+                                <label for="iecNumber">Import Export Code (IEC Number) *</label>
+                                <input type="text" id="iecNumber" name="iecNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gstNumber">GST Number *</label>
+                                <input type="text" id="gstNumber" name="gstNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="panNumber">PAN Number *</label>
+                                <input type="text" id="panNumber" name="panNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cinNumber">Company Registration Number (CIN)</label>
+                                <input type="text" id="cinNumber" name="cinNumber">
+                            </div>
+                            <div class="form-group">
+                                <label for="dgftRegion">DGFT Region/Office</label>
+                                <input type="text" id="dgftRegion" name="dgftRegion">
+                            </div>
+                            <button type="submit" class="btn-save">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- 4. Product & Export Info -->
+                    <div id="productsSection" class="profile-section">
+                        <h3>Product & Export Information</h3>
+                        <form id="productsForm" onsubmit="saveProductsInfo(event)">
+                            <div class="form-group">
+                                <label for="primaryProduct">Primary Export Product *</label>
+                                <input type="text" id="primaryProduct" name="primaryProduct" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productCategory">Product Category *</label>
+                                <select id="productCategory" name="productCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="agriculture">Agriculture</option>
+                                    <option value="textile">Textile</option>
+                                    <option value="machinery">Machinery</option>
+                                    <option value="electronics">Electronics</option>
+                                    <option value="pharmaceuticals">Pharmaceuticals</option>
+                                    <option value="chemicals">Chemicals</option>
+                                    <option value="food">Food & Beverages</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="hsCode">HS Code (Optional)</label>
+                                <input type="text" id="hsCode" name="hsCode" placeholder="e.g., 1234.56.78">
+                            </div>
+                            <div class="form-group">
+                                <label for="targetCountries">Target Countries *</label>
+                                <div class="multi-select-wrapper">
+                                    <select id="targetCountries" name="targetCountries" multiple required>
+                                        <option value="US">United States</option>
+                                        <option value="AE">United Arab Emirates</option>
+                                        <option value="GB">United Kingdom</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="DE">Germany</option>
+                                        <option value="FR">France</option>
+                                        <option value="JP">Japan</option>
+                                        <option value="CN">China</option>
+                                        <option value="BR">Brazil</option>
+                                        <option value="MX">Mexico</option>
+                                        <option value="SG">Singapore</option>
+                                        <option value="NL">Netherlands</option>
+                                        <option value="IT">Italy</option>
+                                        <option value="ES">Spain</option>
+                                        <option value="KR">South Korea</option>
+                                        <option value="SA">Saudi Arabia</option>
+                                        <option value="ZA">South Africa</option>
+                                    </select>
+                                    <small>Hold Ctrl/Cmd to select multiple countries</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="monthlyVolume">Average Monthly Shipment Volume</label>
+                                <input type="text" id="monthlyVolume" name="monthlyVolume"
+                                    placeholder="e.g., 100 units, 50 containers">
+                            </div>
+                            <div class="form-group">
+                                <label for="shippingMethod">Preferred Shipping Method *</label>
+                                <select id="shippingMethod" name="shippingMethod" required>
+                                    <option value="">Select Method</option>
+                                    <option value="air">Air</option>
+                                    <option value="sea">Sea</option>
+                                    <option value="land">Land</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-save">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- 5. Business Address -->
+                    <div id="addressSection" class="profile-section">
+                        <h3>Business Address</h3>
+                        <form id="addressForm" onsubmit="saveAddressInfo(event)">
+                            <div class="form-group">
+                                <label for="businessAddress">Registered Business Address *</label>
+                                <textarea id="businessAddress" name="businessAddress" rows="3" required></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">City *</label>
+                                    <input type="text" id="city" name="city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">State *</label>
+                                    <input type="text" id="state" name="state" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="country">Country *</label>
+                                    <input type="text" id="country" name="country" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pincode">Pincode *</label>
+                                    <input type="text" id="pincode" name="pincode" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-save">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- 6. Banking Details -->
+                    <div id="bankingSection" class="profile-section">
+                        <h3>Banking Details</h3>
+                        <form id="bankingForm" onsubmit="saveBankingInfo(event)">
+                            <div class="form-group">
+                                <label for="bankName">Bank Name</label>
+                                <input type="text" id="bankName" name="bankName">
+                            </div>
+                            <div class="form-group">
+                                <label for="accountHolderName">Account Holder Name</label>
+                                <input type="text" id="accountHolderName" name="accountHolderName">
+                            </div>
+                            <div class="form-group">
+                                <label for="accountNumber">Account Number</label>
+                                <input type="text" id="accountNumber" name="accountNumber">
+                            </div>
+                            <div class="form-group">
+                                <label for="ifscCode">IFSC Code / SWIFT Code</label>
+                                <input type="text" id="ifscCode" name="ifscCode">
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentMethod">Preferred Payment Method</label>
+                                <select id="paymentMethod" name="paymentMethod">
+                                    <option value="">Select Method</option>
+                                    <option value="wire-transfer">Wire Transfer</option>
+                                    <option value="letter-of-credit">Letter of Credit</option>
+                                    <option value="documentary-collection">Documentary Collection</option>
+                                    <option value="open-account">Open Account</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-save">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- 7. Document Uploads -->
+                    <div id="documentsSection" class="profile-section">
+                        <h3>Document Uploads</h3>
+                        <form id="documentsForm" onsubmit="saveDocumentsInfo(event)">
+                            <div class="document-upload-grid">
+                                <div class="document-upload-item">
+                                    <label for="iecCertificate">IEC Certificate</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="iecCertificate" name="iecCertificate"
+                                            accept=".pdf,.jpg,.jpeg,.png"
+                                            onchange="handleDocumentUpload(event, 'iecCertificate')">
+                                        <label for="iecCertificate" class="file-upload-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                <polyline points="17 8 12 3 7 8"></polyline>
+                                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                                            </svg>
+                                            Upload File
+                                        </label>
+                                        <div class="file-preview" id="iecCertificatePreview"></div>
+                                    </div>
+                                </div>
+                                <div class="document-upload-item">
+                                    <label for="gstCertificate">GST Certificate</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="gstCertificate" name="gstCertificate"
+                                            accept=".pdf,.jpg,.jpeg,.png"
+                                            onchange="handleDocumentUpload(event, 'gstCertificate')">
+                                        <label for="gstCertificate" class="file-upload-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                <polyline points="17 8 12 3 7 8"></polyline>
+                                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                                            </svg>
+                                            Upload File
+                                        </label>
+                                        <div class="file-preview" id="gstCertificatePreview"></div>
+                                    </div>
+                                </div>
+                                <div class="document-upload-item">
+                                    <label for="companyRegistration">Company Registration Certificate</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="companyRegistration" name="companyRegistration"
+                                            accept=".pdf,.jpg,.jpeg,.png"
+                                            onchange="handleDocumentUpload(event, 'companyRegistration')">
+                                        <label for="companyRegistration" class="file-upload-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                <polyline points="17 8 12 3 7 8"></polyline>
+                                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                                            </svg>
+                                            Upload File
+                                        </label>
+                                        <div class="file-preview" id="companyRegistrationPreview"></div>
+                                    </div>
+                                </div>
+                                <div class="document-upload-item">
+                                    <label for="ownerIdProof">Owner ID Proof (Aadhar/Passport)</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="ownerIdProof" name="ownerIdProof"
+                                            accept=".pdf,.jpg,.jpeg,.png"
+                                            onchange="handleDocumentUpload(event, 'ownerIdProof')">
+                                        <label for="ownerIdProof" class="file-upload-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                <polyline points="17 8 12 3 7 8"></polyline>
+                                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                                            </svg>
+                                            Upload File
+                                        </label>
+                                        <div class="file-preview" id="ownerIdProofPreview"></div>
+                                    </div>
+                                </div>
+                                <div class="document-upload-item">
+                                    <label for="addressProof">Address Proof</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="addressProof" name="addressProof"
+                                            accept=".pdf,.jpg,.jpeg,.png"
+                                            onchange="handleDocumentUpload(event, 'addressProof')">
+                                        <label for="addressProof" class="file-upload-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                <polyline points="17 8 12 3 7 8"></polyline>
+                                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                                            </svg>
+                                            Upload File
+                                        </label>
+                                        <div class="file-preview" id="addressProofPreview"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-save">Save Documents</button>
+                        </form>
+                    </div>
+
+                    <!-- 8. Account Settings -->
+                    <div id="settingsSection" class="profile-section">
+                        <h3>Account Settings</h3>
+                        <form id="settingsForm" onsubmit="saveSettingsInfo(event)">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword" name="currentPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" name="newPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPhoneNumber">New Phone Number</label>
+                                <input type="tel" id="newPhoneNumber" name="newPhoneNumber">
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="twoFactorAuth" name="twoFactorAuth">
+                                    <span>Enable 2FA / OTP Login</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn-save">Save Changes</button>
+                        </form>
+                        <div class="logout-section">
+                            <button type="button" class="btn-logout" onclick="handleLogout()">Logout</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success/Error Messages -->
+                <div id="profileMessage" class="profile-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- eKYC Modal -->
+    <div id="ekycModal" class="ekyc-modal" role="dialog" aria-labelledby="ekycModalTitle" aria-hidden="true">
+        <div class="ekyc-modal-overlay" onclick="closeEKYCModal()"></div>
+        <div class="ekyc-modal-container">
+            <button class="ekyc-modal-close" onclick="closeEKYCModal()" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="ekyc-modal-content">
+                <div class="ekyc-modal-header">
+                    <h2 id="ekycModalTitle">Verify Your Identity (eKYC)</h2>
+                    <p>Please complete the verification process to continue</p>
+                </div>
+
+                <form id="ekycForm" onsubmit="submitEKYC(event)">
+                    <!-- Identity Proof -->
+                    <div class="ekyc-form-section">
+                        <h3>Identity Proof</h3>
+                        <div class="form-group">
+                            <label for="identityProofType">Select ID Proof *</label>
+                            <select id="identityProofType" name="identityProofType" required
+                                onchange="handleIdentityProofChange()">
+                                <option value="">Select ID Proof</option>
+                                <!-- Options will be populated dynamically based on country -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="identityProofFile">Upload ID Proof *</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="identityProofFile" name="identityProofFile"
+                                    accept=".pdf,.jpg,.jpeg,.png" required
+                                    onchange="handleFilePreview(event, 'identityProof')">
+                                <label for="identityProofFile" class="file-upload-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
+                                    Upload File
+                                </label>
+                                <div class="file-preview" id="identityProofPreview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Proof -->
+                    <div class="ekyc-form-section">
+                        <h3>Business Verification</h3>
+                        <div class="form-group">
+                            <label for="businessProofType">Select Business Proof *</label>
+                            <select id="businessProofType" name="businessProofType" required>
+                                <option value="">Select Business Proof</option>
+                                <!-- Options will be populated dynamically based on country -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="businessProofFile">Upload Business Proof *</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="businessProofFile" name="businessProofFile"
+                                    accept=".pdf,.jpg,.jpeg,.png" required
+                                    onchange="handleFilePreview(event, 'businessProof')">
+                                <label for="businessProofFile" class="file-upload-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
+                                    Upload File
+                                </label>
+                                <div class="file-preview" id="businessProofPreview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bank Proof -->
+                    <div class="ekyc-form-section">
+                        <h3>Bank Proof</h3>
+                        <div class="form-group">
+                            <label for="bankProofType">Select Bank Proof *</label>
+                            <select id="bankProofType" name="bankProofType" required>
+                                <option value="">Select Bank Proof</option>
+                                <!-- Options will be populated dynamically based on country -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankProofFile">Upload Bank Proof *</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="bankProofFile" name="bankProofFile" accept=".pdf,.jpg,.jpeg,.png"
+                                    required onchange="handleFilePreview(event, 'bankProof')">
+                                <label for="bankProofFile" class="file-upload-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
+                                    Upload File
+                                </label>
+                                <div class="file-preview" id="bankProofPreview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Selfie Verification -->
+                    <div class="ekyc-form-section">
+                        <h3>Selfie Verification</h3>
+                        <div class="form-group">
+                            <label>Capture Live Selfie *</label>
+                            <div class="camera-capture-wrapper">
+                                <div class="camera-preview-container" id="cameraPreviewContainer"
+                                    style="display: none;">
+                                    <video id="cameraVideo" autoplay playsinline
+                                        style="width: 100%; max-width: 400px; border-radius: 8px; background: #000;"></video>
+                                    <canvas id="cameraCanvas" style="display: none;"></canvas>
+                                </div>
+                                <div class="camera-controls">
+                                    <button type="button" class="btn-camera" id="startCameraBtn"
+                                        onclick="startCamera()">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path
+                                                d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                                            </path>
+                                            <circle cx="12" cy="13" r="4"></circle>
+                                        </svg>
+                                        Open Camera
+                                    </button>
+                                    <button type="button" class="btn-capture" id="captureBtn" onclick="captureSelfie()"
+                                        style="display: none;">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                        </svg>
+                                        Capture Photo
+                                    </button>
+                                    <button type="button" class="btn-cancel-camera" id="cancelCameraBtn"
+                                        onclick="stopCamera()" style="display: none;">
+                                        Cancel
+                                    </button>
+                                </div>
+                                <div class="file-preview" id="selfiePreview"></div>
+                                <input type="hidden" id="selfieFile" name="selfieFile" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Success/Error Messages -->
+                    <div id="ekycMessage" class="ekyc-message"></div>
+
+                    <!-- Form Actions -->
+                    <div class="ekyc-form-actions">
+                        <button type="button" class="btn-cancel" onclick="closeEKYCModal()">Cancel</button>
+                        <button type="submit" class="btn-submit" id="ekycSubmitBtn">Submit eKYC</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Call Verification Modal -->
+    <div id="videoCallModal" class="video-call-modal" role="dialog" aria-labelledby="videoCallModalTitle"
+        aria-hidden="true">
+        <div class="video-call-modal-overlay"></div>
+        <div class="video-call-modal-container">
+            <div class="video-call-header">
+                <h2 id="videoCallModalTitle">Video Call Verification</h2>
+                <button class="video-call-close" onclick="closeVideoCallModal()" aria-label="Close modal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="video-call-content">
+                <!-- Waiting for Agent -->
+                <div id="waitingForAgent" class="video-call-status">
+                    <div class="status-icon">📞</div>
+                    <h3>Requesting Video Call</h3>
+                    <p>Please wait while we connect you with an agent...</p>
+                    <div class="loading-spinner"></div>
+                </div>
+
+                <!-- Video Call Interface -->
+                <div id="videoCallInterface" class="video-call-interface" style="display: none;">
+                    <div class="video-container">
+                        <div class="video-wrapper remote-video">
+                            <video id="remoteVideo" autoplay playsinline></video>
+                            <div class="video-label">Agent</div>
+                        </div>
+                        <div class="video-wrapper local-video">
+                            <video id="localVideo" autoplay playsinline muted></video>
+                            <div class="video-label">You</div>
+                        </div>
+                    </div>
+                    <div class="video-controls">
+                        <button class="video-control-btn" id="muteBtn" onclick="toggleMute()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+                            </svg>
+                        </button>
+                        <button class="video-control-btn" id="videoBtn" onclick="toggleVideo()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M23 7l-7 5 7 5V7z"></path>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg>
+                        </button>
+                        <button class="video-control-btn end-call" onclick="endVideoCall()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Call Ended -->
+                <div id="callEnded" class="video-call-status" style="display: none;">
+                    <div class="status-icon">✓</div>
+                    <h3>Verification Complete</h3>
+                    <p id="callEndedMessage">Your verification is being processed. You will be notified once it's
+                        complete.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Preview/Detail Modal -->
+    <div id="documentDetailModal" class="document-detail-modal" role="dialog" aria-labelledby="documentDetailTitle"
+        aria-hidden="true">
+        <div class="document-detail-overlay" onclick="closeDocumentDetail()"></div>
+        <div class="document-detail-container">
+            <button class="document-detail-close" onclick="closeDocumentDetail()" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="document-detail-content">
+                <!-- Preview Area -->
+                <div class="document-preview-area" id="documentPreviewArea">
+                    <div class="document-preview-image" id="documentPreviewImage"></div>
+                </div>
+
+                <!-- Document Info -->
+                <div class="document-detail-info">
+                    <div class="document-detail-header">
+                        <div>
+                            <h2 id="documentDetailTitle">Document Name</h2>
+                            <p id="documentDetailType" class="document-type-badge">Type</p>
+                        </div>
+                        <div class="document-detail-actions">
+                            <button class="btn-download" onclick="downloadDocument()" title="Download">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Download
+                            </button>
+                            <button class="btn-delete" id="documentDeleteButton" onclick="deleteDocument()"
+                                title="Delete">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path
+                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                    </path>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                </svg>
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="document-detail-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">File Size</span>
+                            <span class="meta-value" id="documentSize">-</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Uploaded</span>
+                            <span class="meta-value" id="documentDate">-</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">File Type</span>
+                            <span class="meta-value" id="documentFileType">-</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Status</span>
+                            <span class="meta-value" id="documentStatus">-</span>
+                        </div>
+                    </div>
+
+                    <div class="document-detail-description">
+                        <h4>Details</h4>
+                        <p id="documentDescription">No additional information available.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="checkout-modal" role="dialog" aria-labelledby="checkoutModalTitle" aria-hidden="true">
+        <div class="checkout-modal-overlay" onclick="closeCheckoutModal()"></div>
+        <div class="checkout-modal-container">
+            <button class="checkout-modal-close" onclick="closeCheckoutModal()" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="checkout-modal-content">
+                <div class="checkout-modal-header">
+                    <h2 id="checkoutModalTitle">Checkout</h2>
+                    <p>Complete your order with shipping details and payment</p>
+                </div>
+
+                <form id="checkoutForm" class="checkout-form">
+                    <!-- Step 1: Shipping Information -->
+                    <div class="checkout-step active" id="checkoutStep1">
+                        <h3>Shipping Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="shippingFullName">Full Name *</label>
+                            <input type="text" id="shippingFullName" name="shippingFullName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shippingEmail">Email *</label>
+                            <input type="email" id="shippingEmail" name="shippingEmail" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shippingPhone">Phone Number *</label>
+                            <input type="tel" id="shippingPhone" name="shippingPhone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shippingAddress">Street Address *</label>
+                            <textarea id="shippingAddress" name="shippingAddress" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="shippingCity">City *</label>
+                                <input type="text" id="shippingCity" name="shippingCity" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="shippingState">State/Province *</label>
+                                <input type="text" id="shippingState" name="shippingState" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="shippingCountry">Country *</label>
+                                <input type="text" id="shippingCountry" name="shippingCountry" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="shippingZipCode">ZIP/Postal Code *</label>
+                                <input type="text" id="shippingZipCode" name="shippingZipCode" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shippingNotes">Delivery Instructions (Optional)</label>
+                            <textarea id="shippingNotes" name="shippingNotes" rows="2" placeholder="Any special delivery instructions..."></textarea>
+                        </div>
+
+                        <button type="button" class="btn-primary" onclick="goToCheckoutStep(2)">Continue to Documents</button>
+                    </div>
+
+                    <!-- Step 2: Required Documents -->
+                    <div class="checkout-step" id="checkoutStep2">
+                        <h3>Required Documents for International Order</h3>
+                        <p style="color: #666; margin-bottom: 1.5rem;">Please upload the following documents required for international shipping:</p>
+
+                        <div class="document-upload-section">
+                            <div class="form-group">
+                                <label for="commercialInvoice">Commercial Invoice *</label>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" id="commercialInvoice" name="commercialInvoice" accept=".pdf,.jpg,.jpeg,.png" required>
+                                    <label for="commercialInvoice" class="file-upload-btn">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                                        </svg>
+                                        Upload Commercial Invoice
+                                    </label>
+                                    <div class="file-preview" id="commercialInvoicePreview"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="packingList">Packing List *</label>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" id="packingList" name="packingList" accept=".pdf,.jpg,.jpeg,.png" required>
+                                    <label for="packingList" class="file-upload-btn">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                                        </svg>
+                                        Upload Packing List
+                                    </label>
+                                    <div class="file-preview" id="packingListPreview"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="certificateOfOrigin">Certificate of Origin (Optional)</label>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" id="certificateOfOrigin" name="certificateOfOrigin" accept=".pdf,.jpg,.jpeg,.png">
+                                    <label for="certificateOfOrigin" class="file-upload-btn">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                                        </svg>
+                                        Upload Certificate of Origin
+                                    </label>
+                                    <div class="file-preview" id="certificateOfOriginPreview"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exportLicense">Export License (If Required)</label>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" id="exportLicense" name="exportLicense" accept=".pdf,.jpg,.jpeg,.png">
+                                    <label for="exportLicense" class="file-upload-btn">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                                        </svg>
+                                        Upload Export License
+                                    </label>
+                                    <div class="file-preview" id="exportLicensePreview"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkout-step-actions">
+                            <button type="button" class="btn-secondary" onclick="goToCheckoutStep(1)">Back</button>
+                            <button type="button" class="btn-primary" onclick="goToCheckoutStep(3)">Continue to Payment</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Payment -->
+                    <div class="checkout-step" id="checkoutStep3">
+                        <h3>Payment</h3>
+                        
+                        <div class="order-summary">
+                            <h4>Order Summary</h4>
+                            <div id="checkoutOrderSummary"></div>
+                            <div class="order-total">
+                                <strong>Total: <span id="checkoutTotalAmount">$0.00</span></strong>
+                            </div>
+                        </div>
+
+                        <div class="payment-options">
+                            <h4>Choose Payment Method</h4>
+                            <div class="payment-method-buttons">
+                                <button type="button" class="payment-method-btn active" onclick="selectPaymentMethod('razorpay')">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                                    </svg>
+                                    <span>Pay Now (Razorpay)</span>
+                                </button>
+                                <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('paylater')">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    <span>Pay Later</span>
+                                </button>
+                            </div>
+                            <input type="hidden" id="selectedPaymentMethod" name="paymentMethod" value="razorpay">
+                        </div>
+
+                        <div id="razorpayContainer" style="display: block;">
+                            <p style="color: #666; margin: 1rem 0;">You will be redirected to Razorpay payment gateway after clicking "Place Order"</p>
+                        </div>
+
+                        <div id="payLaterContainer" style="display: none;">
+                            <div class="alert-info">
+                                <p><strong>Pay Later Option:</strong> Your order will be placed and payment will be marked as pending. You can complete the payment later from your order history.</p>
+                            </div>
+                        </div>
+
+                        <div class="checkout-step-actions">
+                            <button type="button" class="btn-secondary" onclick="goToCheckoutStep(2)">Back</button>
+                            <button type="submit" class="btn-primary" id="placeOrderBtn">Place Order</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Success/Error Messages -->
+                <div id="checkoutMessage" class="checkout-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Razorpay Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="dashboard-script.js"></script>
+</body>
+
+</html>

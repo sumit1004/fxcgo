@@ -1,0 +1,75 @@
+{
+  "rules": {
+    "importers": {
+      ".read": "auth != null",
+      ".write": false,
+      "$uid": {
+        ".read": "$uid === auth.uid || auth != null",
+        ".write": "$uid === auth.uid || auth != null",
+        "cart": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null"
+        },
+        "profile": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null"
+        },
+        "ekyc": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null"
+        },
+        "videoCallRequests": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null",
+          "$requestId": {
+            ".read": "$uid === auth.uid || auth != null",
+            ".write": "$uid === auth.uid || auth != null"
+          }
+        },
+        "summary": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null"
+        },
+        "shipments": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null"
+        },
+        "documents": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null"
+        },
+        "payments": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null"
+        },
+        "disputes": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null"
+        },
+        "support": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null"
+        },
+        "orders": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null"
+        },
+        "notifications": {
+          ".read": "$uid === auth.uid || auth != null",
+          ".write": "$uid === auth.uid || auth != null"
+        }
+      }
+    },
+    "supportStatus": {
+      "admin": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+    "supportChat": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
+

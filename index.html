@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="GlobalGuard Exports - Secure your export profits with AI-powered currency protection and safe shipments">
+    <title>Fx-CGO</title>
+    <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+
+                    <a href="index.html" style="text-decoration: none;"><img src="assets/logo-1.png" alt=""
+                            width="40px"><span class="logo-text" aria-label="GlobalGuard Exports">FXcgo</span></a>
+                </div>
+               
+                <button class="btn-get-started btn-primary" aria-label="Get started with GlobalGuard Exports"
+                    onclick="openAuthModal('login')">Get Started</button>
+               
+                  
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+            <div class="hero-pattern"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text-content">
+                
+                <h1 class="hero-title">
+                    Protect Your <span class="gradient-text">Export Profits</span> with
+                    <span class="gradient-text">AI-Powered</span> Risk Management
+                </h1>
+                <p class="hero-subtitle">
+                    The all-in-one platform that shields exporters from currency fluctuations, 
+                    shipment risks, and fragmented trade processes. Secure your global trade operations today.
+                </p>
+                <div class="hero-cta">
+                    <button class="btn-hero-primary" onclick="openAuthModal('signup')">
+                        <span>Get Started Free</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                    <a href="#about" class="btn-hero-secondary">
+                        <span>Learn More</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Risk Protection</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">AI Monitoring</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="animated-container">
+                    <!-- Center Logo -->
+                    <div class="logo-center">
+                        <img src="assets/logo.png" alt="FXcgo Logo" height="300px">
+                    </div>
+
+                    <!-- Orbital Images Container -->
+                    <div class="orbital-container">
+                        <!-- Right Top Image -->
+                        <div class="orbital-item orbital-right-top">
+                            <div class="orbital-image">
+                                <img src="assets/forwardcontract.png" alt="Forward Contract" height="150px" width="300px">
+                            </div>
+                            <div class="orbital-label1">Forward<br>Contract</div>
+                        </div>
+
+                        <!-- Right Bottom Image -->
+                        <div class="orbital-item orbital-right-bottom">
+                            <div class="orbital-image">
+                                <img src="assets/insurance.png" alt="Insurance" height="150px" width="300px">
+                            </div>
+                            <div class="orbital-label1">Insurance</div>
+                        </div>
+
+                        <!-- Left Top Image -->
+                        <div class="orbital-item orbital-left-top">
+                            <div class="orbital-image">
+                                <img src="assets/marketplace.png" alt="Marketplace" height="150px" width="300px">
+                            </div>
+                            <div class="orbital-label">For<br>Marketplace</div>
+                        </div>
+
+                        <!-- Left Bottom Image -->
+                        <div class="orbital-item orbital-left-bottom">
+                            <div class="orbital-image">
+                                <img src="assets/documentation.png" alt="Documentation" height="150px" width="300px">
+                            </div>
+                            <div class="orbital-label">Documentation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Scroll to explore</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-container">
+            <!-- Header Section -->
+            <div class="about-hero">
+                <div class="about-hero-content">
+                    <div class="brand-badge">
+                        <span class="brand-text">FXcgo</span>
+                    </div>
+                    <h1 class="about-title">
+                        An <span class="highlight-text">end-to-end</span> export risk management platform 
+                        for <span class="highlight-text">modern global trade</span>
+                    </h1>
+                    <p class="about-subtitle">
+                        A unified export-trade platform designed to protect exporters from financial risk, 
+                        operational delays, and fragmented global trade processes. Built with cutting-edge 
+                        AI technology to ensure your business thrives in the global marketplace.
+                    </p>
+                    <div class="about-features-preview">
+                        <div class="preview-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>AI-Powered Risk Analysis</span>
+                        </div>
+                        <div class="preview-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Real-Time Currency Protection</span>
+                        </div>
+                        <div class="preview-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Streamlined Documentation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Cards Section -->
+            <div class="about-content-wrapper">
+                <div class="content-card problem-card">
+                    <div class="card-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                    </div>
+                    <h3>Forward Contract Protection</h3>
+                    <p>Lock today's currency rate for future payments and protect your business from unpredictable market movements.</p>
+                </div>
+
+                <div class="content-card solution-card">
+                    <div class="card-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Best Recommended Insurance Plans</h3>
+                    <p>Compare multiple insurance providers instantly. Get the best coverage based on your route, cargo type, and risk factors.</p>
+                </div>
+
+                <div class="content-card benefits-card">
+                    <div class="card-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Marketplace</h3>
+                    <p>It simplifies global trade by offering tools for sourcing, logistics, payments, and expanding into new markets.</p>
+                </div>
+
+                
+                <div class="content-card benefits-card">
+                    <div class="card-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Secure International Payments</h3>
+                    <p>Make fast, compliant cross-border payments linked directly to your shipments and contracts.</p>
+                </div>
+
+                
+                <div class="content-card benefits-card">
+                    <div class="card-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Export Document Advisor</h3>
+                    <p>Upload, verify, and share all trade documents digitally—invoice, packing list, insurance, and more.</p>
+                </div>
+            </div>
+
+            
+
+            <!-- Features Grid -->
+            <div class="features-section">
+                <div class="features-header">
+                    <h2 class="features-title">Our Core Features</h2>
+                    <p class="features-subtitle">Everything you need to manage export risks in one platform</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-card-inner">
+                            <div class="feature-icon-wrapper">
+                                <div class="feature-icon-bg marketplace-bg"></div>
+                                <img src="assets/marketplace.png" alt="Marketplace" class="feature-image">
+                            </div>
+                            <div class="feature-content">
+                                <h3>For Marketplace</h3>
+                                <p>Connect with verified exporters and importers through our integrated marketplace. Streamline trade partnerships and expand your global network.</p>
+                                <button class="feature-btn" onclick="openAuthModal('signup')">
+                                    <span>Explore Marketplace</span>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-card-inner">
+                            <div class="feature-icon-wrapper">
+                                <div class="feature-icon-bg insurance-bg"></div>
+                                <img src="assets/insurance.png" alt="Insurance" class="feature-image">
+                            </div>
+                            <div class="feature-content">
+                                <h3>Insurance</h3>
+                                <p>AI-driven insurance recommendations protect your shipments from loss, damage, and delays. Get personalized coverage that matches your trade needs.</p>
+                                <button class="feature-btn" onclick="openAuthModal('signup')">
+                                    <span>Get Insured</span>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-card-inner">
+                            <div class="feature-icon-wrapper">
+                                <div class="feature-icon-bg contract-bg"></div>
+                                <img src="assets/forwardcontract.png" alt="Forward Contract" class="feature-image">
+                            </div>
+                            <div class="feature-content">
+                                <h3>Forward Contract</h3>
+                                <p>Lock in exchange rates with forward contracts to protect against currency fluctuations. Secure predictable revenue and eliminate forex risk.</p>
+                                <button class="feature-btn" onclick="openAuthModal('signup')">
+                                    <span>Secure Rates</span>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-card-inner">
+                            <div class="feature-icon-wrapper">
+                                <div class="feature-icon-bg docs-bg"></div>
+                                <img src="assets/documentation.png" alt="Documentation" class="feature-image">
+                            </div>
+                            <div class="feature-content">
+                                <h3>Documentation</h3>
+                                <p>QR-enabled digital documentation system ensures error-free paperwork. Track, verify, and manage all export documents in one place.</p>
+                                <button class="feature-btn" onclick="openAuthModal('signup')">
+                                    <span>Manage Docs</span>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal" role="dialog" aria-labelledby="authModalTitle" aria-hidden="true">
+        <div class="auth-modal-overlay" onclick="closeAuthModal()"></div>
+        <div class="auth-modal-container">
+            <button class="auth-modal-close" onclick="closeAuthModal()" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="auth-modal-content">
+                <!-- User Type Switcher -->
+                <div class="auth-user-type-toggle" role="tablist" aria-label="Select account type">
+                    <button type="button" class="user-type-btn active" data-user="exporter"
+                        onclick="switchUserType('exporter')">
+                        <span>Exporter Access</span>
+                    </button>
+                    <button type="button" class="user-type-btn" data-user="importer"
+                        onclick="switchUserType('importer')">
+                        <span>Importer Access</span>
+                    </button>
+                </div>
+
+                <!-- Tab Switcher -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">
+                        <span>Login</span>
+                    </button>
+                    <button class="auth-tab" data-tab="signup" onclick="switchAuthTab('signup')">
+                        <span>Sign Up</span>
+                    </button>
+                </div>
+
+                <div class="auth-user-type-section active" data-user="exporter">
+                    <!-- Login Form -->
+                    <div id="loginForm" class="auth-form active">
+                        <h2 id="authModalTitle" class="auth-form-title">Welcome Back</h2>
+                        <p class="auth-form-subtitle">Login to your exporter account</p>
+
+                        <!-- Login Method Toggle -->
+                        <div class="login-method-toggle">
+                            <button class="method-btn active" data-method="email" onclick="switchLoginMethod('email')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                                Email/Username
+                            </button>
+                            <button class="method-btn" data-method="otp" onclick="switchLoginMethod('otp')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                                    <path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01"></path>
+                                </svg>
+                                OTP
+                            </button>
+                        </div>
+
+                        <!-- Email/Password Login -->
+                        <div id="emailLoginForm" class="login-method-form active">
+                            <form id="emailLoginFormElement" onsubmit="handleEmailLogin(event, 'exporter')">
+                                <div class="form-group">
+                                    <label for="loginEmail">Email or Username</label>
+                                    <input type="text" id="loginEmail" name="email"
+                                        placeholder="Enter your email or username" required autocomplete="username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="loginPassword">Password</label>
+                                    <div class="password-input-wrapper">
+                                        <input type="password" id="loginPassword" name="password"
+                                            placeholder="Enter your password" required autocomplete="current-password">
+                                        <button type="button" class="password-toggle"
+                                            onclick="togglePassword('loginPassword')"
+                                            aria-label="Toggle password visibility">
+                                            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-options">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="remember">
+                                        <span>Remember me</span>
+                                    </label>
+                                    <a href="#" class="forgot-password-link"
+                                        onclick="handleForgotPassword(event, 'exporter')">Forgot Password?</a>
+                                </div>
+                                <button type="submit" class="btn-submit" id="emailLoginBtn">
+                                    <span class="btn-text">Login</span>
+                                    <span class="btn-loader"></span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- OTP Login -->
+                        <div id="otpLoginForm" class="login-method-form">
+                            <form id="otpLoginFormElement" onsubmit="handleOTPLogin(event)">
+                                <div class="form-group">
+                                    <label for="otpEmail">Email or Phone</label>
+                                    <input type="text" id="otpEmail" name="otpEmail"
+                                        placeholder="Enter your email or phone number" required>
+                                </div>
+                                <div class="form-group" id="otpCodeGroup" style="display: none;">
+                                    <label for="otpCode">Enter OTP</label>
+                                    <input type="text" id="otpCode" name="otpCode" placeholder="Enter 6-digit OTP"
+                                        maxlength="6" pattern="[0-9]{6}">
+                                </div>
+                                <button type="submit" class="btn-submit" id="otpLoginBtn">
+                                    <span class="btn-text" id="otpBtnText">Send OTP</span>
+                                    <span class="btn-loader"></span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Signup Form -->
+                    <div id="signupForm" class="auth-form">
+                        <h2 class="auth-form-title">Create Account</h2>
+                        <p class="auth-form-subtitle">Join GlobalGuard Exports today</p>
+
+                        <form id="signupFormElement" onsubmit="handleSignup(event, 'exporter')">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="signupName">Full Name / Username</label>
+                                    <input type="text" id="signupName" name="name" placeholder="Enter your full name"
+                                        required autocomplete="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="companyName">Company Name</label>
+                                    <input type="text" id="companyName" name="company" placeholder="Enter company name"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="signupEmail">Email Address</label>
+                                <input type="email" id="signupEmail" name="email" placeholder="Enter your email"
+                                    required autocomplete="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="signupPassword">Password</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="signupPassword" name="password"
+                                        placeholder="Create a strong password" required autocomplete="new-password">
+                                    <button type="button" class="password-toggle"
+                                        onclick="togglePassword('signupPassword')"
+                                        aria-label="Toggle password visibility">
+                                        <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="password-strength" id="passwordStrength"></div>
+                            </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <select id="country" name="country" required>
+                                <option value="">Select Country</option>
+                                <option value="IN">India</option>
+                                <option value="US">United States</option>
+                                <option value="GB">United Kingdom</option>
+                                <option value="CA">Canada</option>
+                                <option value="AU">Australia</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="JP">Japan</option>
+                                <option value="CN">China</option>
+                                <option value="BR">Brazil</option>
+                                <option value="MX">Mexico</option>
+                                <option value="AE">United Arab Emirates</option>
+                                <option value="SG">Singapore</option>
+                                <option value="NL">Netherlands</option>
+                                <option value="IT">Italy</option>
+                                <option value="ES">Spain</option>
+                                <option value="KR">South Korea</option>
+                                <option value="SA">Saudi Arabia</option>
+                                <option value="ZA">South Africa</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Exact Address</label>
+                        <textarea id="address" name="address" rows="3" placeholder="Enter your complete address"
+                            required></textarea>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="terms" required>
+                            <span>I agree to the <a href="#" target="_blank">Terms & Conditions</a> and <a href="#"
+                                    target="_blank">Privacy Policy</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-submit" id="signupBtn">
+                        <span class="btn-text">Create Account</span>
+                        <span class="btn-loader"></span>
+                    </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="auth-user-type-section" data-user="importer">
+                <!-- Importer Login Form -->
+                <div id="importerLoginForm" class="auth-form">
+                    <h2 class="auth-form-title">Importer Login</h2>
+                    <p class="auth-form-subtitle">Secure access for importer operations</p>
+
+                    <form id="importerEmailLoginFormElement" onsubmit="handleEmailLogin(event, 'importer')">
+                        <div class="form-group">
+                            <label for="importerLoginEmail">Email Address</label>
+                            <input type="email" id="importerLoginEmail" name="email"
+                                placeholder="Enter your importer email" required autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="importerLoginPassword">Password</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="importerLoginPassword" name="password"
+                                    placeholder="Enter your password" required autocomplete="current-password">
+                                <button type="button" class="password-toggle"
+                                    onclick="togglePassword('importerLoginPassword')"
+                                    aria-label="Toggle password visibility">
+                                    <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="remember">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="#" class="forgot-password-link"
+                                onclick="handleForgotPassword(event, 'importer')">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn-submit" id="importerEmailLoginBtn">
+                            <span class="btn-text">Login</span>
+                            <span class="btn-loader"></span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Importer Signup Form -->
+                <div id="importerSignupForm" class="auth-form">
+                    <h2 class="auth-form-title">Importer Sign Up</h2>
+                    <p class="auth-form-subtitle">Create a dedicated importer workspace</p>
+
+                    <form id="importerSignupFormElement" onsubmit="handleSignup(event, 'importer')">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="importerName">Authorized Person</label>
+                                <input type="text" id="importerName" name="name" placeholder="Full legal name" required
+                                    autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="importerCompanyName">Importer / Company Name</label>
+                                <input type="text" id="importerCompanyName" name="company"
+                                    placeholder="Registered company name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="importerEmail">Work Email Address</label>
+                            <input type="email" id="importerEmail" name="email" placeholder="name@company.com" required
+                                autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="importerPassword">Password</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="importerPassword" name="password"
+                                    placeholder="Minimum 8 characters" required autocomplete="new-password">
+                                <button type="button" class="password-toggle"
+                                    onclick="togglePassword('importerPassword')"
+                                    aria-label="Toggle password visibility">
+                                    <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="password-strength" id="importerPasswordStrength"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="importerCountry">Country</label>
+                                <select id="importerCountry" name="country" required>
+                                    <option value="">Select Country</option>
+                                    <option value="IN">India</option>
+                                    <option value="US">United States</option>
+                                    <option value="GB">United Kingdom</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="DE">Germany</option>
+                                    <option value="FR">France</option>
+                                    <option value="JP">Japan</option>
+                                    <option value="CN">China</option>
+                                    <option value="BR">Brazil</option>
+                                    <option value="MX">Mexico</option>
+                                    <option value="AE">United Arab Emirates</option>
+                                    <option value="SG">Singapore</option>
+                                    <option value="NL">Netherlands</option>
+                                    <option value="IT">Italy</option>
+                                    <option value="ES">Spain</option>
+                                    <option value="KR">South Korea</option>
+                                    <option value="SA">Saudi Arabia</option>
+                                    <option value="ZA">South Africa</option>
+                                    <option value="OTHER">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="importerBusinessId">Importer Registration / IEC</label>
+                                <input type="text" id="importerBusinessId" name="registration"
+                                    placeholder="IEC / License number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="importerAddress">Exact Warehouse / Office Address</label>
+                            <textarea id="importerAddress" name="address" rows="3"
+                                placeholder="Include street, city, state, PIN/ZIP" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="importerPhone">Primary Contact Number</label>
+                            <input type="tel" id="importerPhone" name="phone" placeholder="+91 98765 43210" required>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="terms" required>
+                                <span>I agree to the <a href="#" target="_blank">Terms & Conditions</a> and <a href="#"
+                                        target="_blank">Privacy Policy</a></span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn-submit" id="importerSignupBtn">
+                            <span class="btn-text">Create Importer Account</span>
+                            <span class="btn-loader"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Error/Success Messages -->
+            <div id="authMessage" class="auth-message"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top-wave"></div>
+        <div class="footer-container">
+            <div class="footer-main">
+                <!-- Brand Section -->
+                <div class="footer-brand-section">
+                    <div class="footer-logo-wrapper">
+                        <img src="assets/logo.png" alt="FXcgo Logo" class="footer-logo-img">
+                        <span class="footer-logo-text">FXcgo</span>
+                    </div>
+                    <p class="footer-tagline">An end-to-end export risk management platform for modern global trade.</p>
+                    <p class="footer-description">
+                        Making global exporting safer, smarter, and more reliable for every exporter. Protect your business from financial risk, operational delays, and fragmented trade processes.
+                    </p>
+                    <div class="footer-social-section">
+                        <p class="social-label">Connect with us</p>
+                        <div class="footer-social">
+                            <a href="#" class="social-link" aria-label="LinkedIn" title="LinkedIn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Twitter" title="Twitter">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Facebook" title="Facebook">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Email" title="Email">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links Grid -->
+                <div class="footer-links-grid">
+                    <!-- Quick Links -->
+                    <div class="footer-link-column">
+                        <h3 class="footer-heading">Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#" onclick="openAuthModal('signup'); return false;">Get Started</a></li>
+                            <li><a href="#" onclick="openAuthModal('login'); return false;">Login</a></li>
+                            <li><a href="#features">Features</a></li>
+                        </ul>
+                    </div>
+
+                 
+
+                    <!-- Support -->
+                    <div class="footer-link-column">
+                        <h3 class="footer-heading">Support</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Documentation</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="footer-link-column footer-contact-column">
+                        <h3 class="footer-heading">Contact</h3>
+                        <ul class="footer-contact">
+                            <li>
+                                <div class="contact-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                </div>
+                                <span>Rungta International Skills university</span>
+                            </li>
+                            <li>
+                                <div class="contact-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                </div>
+                                <a href="mailto:sumitkumar042006@gmail.com">sumitkumar042006@gmail.com</a>
+                            </li>
+                            <li>
+                                <div class="contact-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                </div>
+                                <a href="tel:+919229923377">+91 922 992 3377</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">
+                        &copy; 2025 <strong>FXcgo</strong>. All rights reserved.
+                    </p>
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <span class="footer-divider">•</span>
+                        <a href="#">Terms of Service</a>
+                        <span class="footer-divider">•</span>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
